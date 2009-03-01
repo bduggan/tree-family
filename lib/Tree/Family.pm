@@ -76,7 +76,7 @@ sub new {
 sub _init {
     my $self = shift;
     return if exists($self->{people});
-    if (-e $self->{filename}) {
+    if (-e $self->{filename} && -s $self->{filename}) {
         my $filename = $self->{filename};
         $self->{people} = do $filename;
     } else {

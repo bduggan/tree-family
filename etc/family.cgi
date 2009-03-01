@@ -46,7 +46,7 @@ $Tree::Family::urlBase = $ScriptURL;
 our $TreeFile = '/var/www/html/data/tree.dmp';
 
 # TODO Get these from the browser :
-our $Vsize   = 420;
+our $Vsize   = 450;
 our $Hsize   = 900; 
 our $maxSize = 10;
 our $HeaderPrinted = 0;
@@ -87,7 +87,7 @@ sub rebuild_commands {
 sub rebuild {
     my $q = shift;
     local $| = 1;
-    print $q->header,$q->start_html(-style=>{-src=>"$CSSRoot/family.css"});
+    print $q->header,$q->start_html(-title => 'family tree',-style=>{-src=>"$CSSRoot/family.css"});
     our $HeaderPrinted;
     $HeaderPrinted = 1;
     sysopen(FH, $LockFile, O_WRONLY | O_CREAT) or die "can't open filename: $!";
@@ -148,7 +148,7 @@ sub frontpage {
 <body onload='window.frames[0].scrollBy($coords[0],$coords[1])'>
 <table width=100%>
 <tr>
-<td align='left' width='20%'>family tree</td>
+<td align='left' width='20%'>miti</td>
 <td width='60%'>$links</td>
 <td width='20%' align='right'><nobr>$person_dropdown</nobr>
 $printable</td>
@@ -305,7 +305,7 @@ $q->td({width=>'25%'},$q->table($q->Tr([
                         $q->td(['Spouse',$spouse]),
                 ]))),
 $q->td({width=>'25%'},$q->table($q->Tr([
-                        $q->td(['Kids',$kids]),
+                        $q->td(['Children',$kids]),
                 ]))),
 )).
     "<center>$submit</center>".

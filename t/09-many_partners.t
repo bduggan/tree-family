@@ -3,9 +3,11 @@
 use Test::More qw(no_plan);
 use Tree::Family;
 use Tree::Family::Person;
-$Tree::Family::Person::keyMethod = 'first_name';
+use File::Temp;
 use strict;
-our $tmpfile = "/tmp/treefile.2.$$";
+$Tree::Family::Person::keyMethod = 'first_name';
+our $tmp = File::Temp->new;
+our $tmpfile = $tmp->filename;
 
 #
 #     a --- B --- c
@@ -33,7 +35,8 @@ my ($a_id,$b_id,$c_id,$d_id,$e_id);
     my $tree = Tree::Family->new(filename => $tmpfile);
     is scalar($tree->people),5, "saved, got 5 people";
     my $b = $tree->find(first_name => 'b');
-    my $dotfile = "/tmp/dotfile.$$";
+    my $tmpdot = File::Temp->new;
+    my $dotfile = $tmpdot->filename;
     $tree->write_dotfile($dotfile);
     diag "Wrote dotfile $dotfile";
 }

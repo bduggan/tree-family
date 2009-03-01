@@ -4,8 +4,12 @@ use Test::More qw(no_plan);
 use Tree::Family;
 use Tree::Family::Person;
 use strict;
-our $tmpfile = "/tmp/treefile.2$$";
-our $tmpdot = "/tmp/dotfile.2$$";
+use File::Temp;
+$File::Temp::KEEP_ALL = $ENV{TREE_FAMILY_KEEP_TESTS} if exists($ENV{TREE_FAMILY_KEEP_TESTS});
+our $tmp = File::Temp->new;
+our $tmpdot = File::Temp->new;
+our $tmpfile = $tmp->filename;
+our $tmpdot = $tmpdot->filename;
 
 $Tree::Family::Person::keyMethod = 'first_name';
 
@@ -42,7 +46,7 @@ diag "Making temporary file $tmpfile";
     is $k[0]->first_name, 'darlene', 'kid is darlene';
     $tree->write;
     $tree->write_dotfile($tmpdot);
-    diag "wrote $tmpdot";
+    diag "wrote dotfile $tmpdot";
 }
 
 

@@ -6,7 +6,11 @@ use Tree::Family::Person;
 use Data::Dumper;
 use strict;
 use warnings;
-our $tmpfile = "/tmp/treefile.$$";
+
+use File::Temp;
+$File::Temp::KEEP_ALL = $ENV{TREE_FAMILY_KEEP_TESTS} if exists($ENV{TREE_FAMILY_KEEP_TESTS});
+our $tmp = File::Temp->new;
+our $tmpfile = $tmp->filename;
 
 # $Tree::Family::Person::keyMethod = 'first_name';
 

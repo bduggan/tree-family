@@ -3,9 +3,12 @@
 use Test::More qw(no_plan);
 use Tree::Family;
 use Tree::Family::Person;
+use File::Temp;
 use strict;
-our $tmpfile = "/tmp/treefile.3$$";
-our $tmpdot = "/tmp/dotfile.3$$";
+our $tmp = File::Temp->new;
+our $tmpfile = $tmp->filename;
+my $tmpdot = File::Temp->new;
+my $dotfile = $tmpdot->filename;
 
 $Tree::Family::Person::keyMethod = 'first_name';
 

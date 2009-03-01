@@ -3,9 +3,13 @@
 use Test::More qw(no_plan);
 use Tree::Family;
 use Tree::Family::Person;
-$Tree::Family::Person::keyMethod = 'first_name';
+use File::Temp;
 use strict;
-our $tmpfile = "/tmp/treefile.2.$$";
+$Tree::Family::Person::keyMethod = 'first_name';
+$File::Temp::KEEP_ALL = $ENV{TREE_FAMILY_KEEP_TESTS} if exists($ENV{TREE_FAMILY_KEEP_TESTS});
+our $tmp = File::Temp->new;
+our $tmpfile = $tmp->filename;
+
 
 #
 #     c --- D -+- e
@@ -39,7 +43,9 @@ my ($a_id,$b_id,$c_id,$d_id,$e_id);
     #ok index($dot,"subgraph cluster_$a_id\_$b_id { $a_id -- $b_id { rank=same;$a_id $b_id } }") > 1, "$a_id<-->$b_id is in the dot file";
     #ok index($dot,"$b_id -- $b_id\_$c_id -- $c_id { rank=same;$b_id $c_id $b_id\_$c_id }") > 1, "$b_id and $c_id have a kid in the graph";
     #ok index($dot, "$b_id\_$c_id -- $d_id") > 1, 'd is the kid of b and c';
-    my $dotfile = "/tmp/dotfile.$$";
+
+    my $tmpdot = File::Temp->new;
+    my $dotfile = $tmpdot->filename;
     $tree->write_dotfile($dotfile);
     diag "Wrote dotfile $dotfile";
 }

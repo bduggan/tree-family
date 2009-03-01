@@ -3,9 +3,14 @@
 use Test::More qw(no_plan);
 use Tree::Family;
 use Tree::Family::Person;
+use File::Temp;
 use strict;
-our $tmpfile = "/tmp/treefile.3$$";
-our $tmpdot = "/tmp/dotfile.3$$";
+$File::Temp::KEEP_ALL = $ENV{TREE_FAMILY_KEEP_TESTS} if exists($ENV{TREE_FAMILY_KEEP_TESTS});
+our $tmp = File::Temp->new;
+our $tmpdotfile = File::Temp->new;
+our $tmpfile = $tmp->filename;
+our $tmpdot = $tmpdotfile->filename;
+
 
 $Tree::Family::Person::keyMethod = 'first_name';
 

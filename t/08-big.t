@@ -5,10 +5,14 @@ use Tree::Family;
 use Tree::Family::Person;
 use Data::Faker;
 use Text::GenderFromName qw(gender);
-$Tree::Family::Person::keyMethod = 'first_name';
+use File::Temp;
 use strict;
-our $tmpfile = "/tmp/treefile.2.$$";
+$Tree::Family::Person::keyMethod = 'first_name';
 our $Generations = 4;
+$File::Temp::KEEP_ALL = $ENV{TREE_FAMILY_KEEP_TESTS} if exists($ENV{TREE_FAMILY_KEEP_TESTS});
+our $tmp = File::Temp->new;
+our $tmpfile = $tmp->filename;
+
 
 #
 # Two people have kids.  Each of their kids has 1 boy + 1 girl.
@@ -65,7 +69,8 @@ sub make_ascendants {
 
 make_descendants( $Generations, $mom, $dad, $tree);
 
-my $dotfile = "/tmp/dotfile.$$";
+my $tmpdot = File::Temp->new;
+my $dotfile = $tmpdot->filename;
 
 my $max_generation = $tree->max_generation;
 

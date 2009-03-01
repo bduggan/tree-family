@@ -6,7 +6,12 @@ use Tree::Family::Person;
 use Data::Dumper;
 $Tree::Family::Person::keyMethod = 'first_name';
 use strict;
-our $tmpfile = "/tmp/treefile.2.$$";
+
+use File::Temp;
+$File::Temp::KEEP_ALL = $ENV{TREE_FAMILY_KEEP_TESTS} if exists($ENV{TREE_FAMILY_KEEP_TESTS});
+our $tmp = File::Temp->new(TEMPLATE => 'treefile.XXXXXX');
+our $tmpfile = $tmp->filename;
+
 
 #
 #  a <--> B ----- c
@@ -42,7 +47,8 @@ my ($a_id,$b_id,$c_id,$d_id);
     # like $dot, qr/$a_id -- $b_id/, "$a_id<-->$b_id is in the dot file";
     # like $dot,"$b_id -- $b_id\_$c_id -- $c_id { rank=same;$b_id $c_id $b_id\_$c_id }") > 1, "$b_id and $c_id have a kid in the graph";
     ok index($dot, "$b_id\_$c_id -- $d_id") > 1, 'd is the kid of b and c';
-    my $dotfile = "/tmp/dotfile.$$";
+    my $tmp_dotfile = File::Temp->new;
+    my $dotfile = $tmp_dotfile->filename;
     $tree->write_dotfile($dotfile);
     diag "Wrote dotfile $dotfile";
 }
