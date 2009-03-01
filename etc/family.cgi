@@ -148,7 +148,7 @@ sub frontpage {
 <body onload='window.frames[0].scrollBy($coords[0],$coords[1])'>
 <table width=100%>
 <tr>
-<td align='left' width='20%'>miti</td>
+<td align='left' width='20%'>family tree</td>
 <td width='60%'>$links</td>
 <td width='20%' align='right'><nobr>$person_dropdown</nobr>
 $printable</td>

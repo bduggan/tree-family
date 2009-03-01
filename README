@@ -1,4 +1,11 @@
-Tree-Family
+Tree-Family  -- represent a family tree
+
+This module is a simple interface for manipulating a family
+tree in an object oriented way.
+
+Included in this modules is a web interface : etc/family.cgi.
+It can be installed like any cgi script, see the top of the
+file for various file layout-specific configuration options.
 
 INSTALLATION
 
@@ -9,12 +16,11 @@ To install this module, run the following commands:
     make test
     make install
 
-
 SUPPORT AND DOCUMENTATION
 
 COPYRIGHT AND LICENCE
 
-Copyright (C) 2006 Brian Duggan
+Copyright (C) 2006 - 2009 Brian Duggan
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
