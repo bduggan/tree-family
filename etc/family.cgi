@@ -65,6 +65,7 @@ sub increments {
     for (my $w=$startw;$w<$width;$w+=$incw) {
         push @ret, sprintf('%.1f',$w);
     }
+    push @ret, undef while @ret < 10;
     return @ret;
 }
 

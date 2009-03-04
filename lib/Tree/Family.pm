@@ -76,6 +76,7 @@ sub new {
 sub _init {
     my $self = shift;
     return if exists($self->{people});
+    # $self->{people} will be a hash from ids to T:F:Person objects
     if (-e $self->{filename} && -s $self->{filename}) {
         my $filename = $self->{filename};
         $self->{people} = do $filename;
@@ -117,7 +118,7 @@ sub write {
     Tree::Family::Person->_set_all_partners;
     my $filename = $self->{filename};
     my $tmpfile = $filename."-tmp-".$$.time.(rand 1);
-    my $d = Data::Dumper->new(clone [$self->{people}]); # clone because it's destructive
+    my $d = Data::Dumper->new(clone [$self->{people}]); # clone because dumping is destructive
     $d->Freezer('Freeze'); 
     $d->Toaster('Toast'); 
     open FP, ">$tmpfile" or die "Couldn't write to $tmpfile : $!";

@@ -119,13 +119,6 @@ sub set {
     my ($self,$key,$value) = @_;
     local $@;
     die "bad key $key" unless grep /^$key$/, @Fields, @RelationFields;
-    #die "not a scalar" unless $self->isa('SCALAR');
-    if (defined($value) && !ref $value) {
-        # sanitize ?
-        # $value =~ tr/a-zA-Z0-9 .'//cd;
-    }
-    my $ok = eval { $$self }; # we may be in cleanup
-    return if $@ =~ /not a scalar ref/i;
     $globalHash{$$self}{$key} = $value;
     delete $globalHash{$$self}{$key} if !defined($value);
 }
@@ -143,9 +136,7 @@ $person->get('first_name');
 sub get {
     my ($self,$key) = @_;
     die "bad key $key" unless grep /^$key$/, @Fields, @RelationFields;
-    return unless ref $self; # in cleanup?
     die "no key to get" unless $key;
-    Carp::confess "no self" unless $$self;
     $globalHash{$$self}{$key};
 }
 
@@ -300,6 +291,7 @@ Get people with whom a person had kids.
 =cut
 
 sub partners {
+    # _set_all_partners must have been called
     return @{ shift->get('partners') || [] };
 }
 
@@ -459,7 +451,6 @@ sub Toast {
     $globalHash{$id} = \%i;
     $$self = $id;
     return bless $self, $class;
-    #warn "toasted $id to : ".Dumper(\%i)." globalHash is ".Dumper(\%globalHash);;
 }
 
 #sub DESTROY {
