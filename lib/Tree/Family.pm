@@ -650,6 +650,10 @@ sub DESTROY {
     %Tree::Family::Person::globalHash = ();
 }
 
+=head1 SEE ALSO
+
+Tree::Family::Person
+
 =head1 AUTHOR
 
 Brian Duggan, C<< <bduggan at matatu.org> >>
