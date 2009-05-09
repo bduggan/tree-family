@@ -1,11 +1,31 @@
-# http://module-build.sourceforge.net/META-spec.html
-#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
-name:         Tree-Family
-version:      0.01
-version_from: lib/Tree/Family.pm
-installdirs:  site
+--- #YAML:1.0
+name:               Tree-Family
+version:            0.01
+abstract:           Represents a family tree.
+author:
+    - Brian Duggan <bduggan@matatu.org>
+license:            unknown
+distribution_type:  module
+configure_requires:
+    ExtUtils::MakeMaker:  0
 requires:
-    Test::More:                    0
-
-distribution_type: module
-generated_by: ExtUtils::MakeMaker version 6.17
+    Algorithm::Permute:   0
+    Clone:                0
+    Data::Faker:          0
+    File::Temp:           0
+    Lingua::EN::NameParse:  0
+    List::MoreUtils:      0
+    List::Util:           0
+    Sub::Installer:       0
+    Test::More:           0
+    Text::GenderFromName:  0
+no_index:
+    directory:
+        - t
+        - inc
+generated_by:       ExtUtils::MakeMaker version 6.48
+meta-spec:
+    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
+    version:  1.4
+resources:
+    repository:http://github.com/bduggan/tree-family/tree/master
