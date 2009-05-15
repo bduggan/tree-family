@@ -1,33 +1,34 @@
 =head1 NAME
 
-Tree::Family - Represents a family tree.
-
-=head1 VERSION
-
-Version 0.01
+Tree::Family - Represent and visualize a family tree.
 
 =cut
 
-
 =head1 SYNOPSIS
 
-    use Tree::Family;
+ use Tree::Family;
 
-    my $tree = Tree::Family->new(filename => '/tmp/mytree.dmp');
+ my $tree = Tree::Family->new(filename => '/tmp/mytree.dmp');
 
-    my $person = Tree::Family::Person->new(name => 'Fred');
-    my $nother = Tree::Family::Person->new(name => 'Wilma');
+ my $person = Tree::Family::Person->new(name => 'Fred');
+ my $nother = Tree::Family::Person->new(name => 'Wilma');
 
-    $person->spouse($nother);
+ $person->spouse($nother);
 
-    $tree->add_person($person);
-    $tree->add_person($nother);
+ $tree->add_person($person);
+ $tree->add_person($nother);
 
-    for ($tree->people) {
-        print $_->name;
-    }
+ for ($tree->people) {
+     print $_->name;
+ }
 
-    my $dot_file = $tree->as_dot;
+ my $dot_file = $tree->as_dot;
+
+=head1 DESCRIPTION
+
+Use this module to represent spousal and parental relationships
+among a group of people, and generate a graphviz "dot"
+file to visualize them.
 
 =head1 FUNCTIONS
 
@@ -660,41 +661,10 @@ Brian Duggan, C<< <bduggan at matatu.org> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to
-C<bug-tree-family at rt.cpan.org>, or through the web interface at
-L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Tree-Family>.
-I will be notified, and then you'll automatically be notified of progress on
-your bug as I make changes.
-
-=head1 SUPPORT
-
-You can find documentation for this module with the perldoc command.
-
-    perldoc Tree::Family
-
-You can also look for information at:
-
-=over 4
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/Tree-Family>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/Tree-Family>
-
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Tree-Family>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/Tree-Family>
-
-=back
-
-=head1 ACKNOWLEDGEMENTS
+graphviz uses a lot of heuristics to create a nice layout.  This package
+attempts to micro-manage the contents of the dot file in order to produce
+a nice layout, while still letting  graphviz do the brunt of the work.
+This approach doesn't always produce optimal results.  Patches welcome.
 
 =head1 COPYRIGHT & LICENSE
 

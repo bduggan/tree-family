@@ -166,7 +166,7 @@ sub spouse {
 
 Get/set dad
 
-$luke->dad($vader)
+$luke->dad($darth)
 
 =cut
 
@@ -212,9 +212,9 @@ sub mom {
 
 Add a kid to a person
 
-$carol->add_kid($jan);
-$carol->add_kid($marsha);
-$carol->add_kid($cindy);
+ $carol->add_kid($jan);
+ $carol->add_kid($marsha);
+ $carol->add_kid($cindy);
 
 =cut
 
@@ -230,7 +230,7 @@ sub add_kid {
 
 Remove a kid from a person
 
-$fela->remove_kid($femi)
+$someone->remove_kid($annie)
 
 =cut
 
@@ -246,7 +246,7 @@ sub delete_kid {
 
 Return an array of kids
 
-print for $mike->kids
+print $_->name for $mike->kids
 
 =cut
 
@@ -258,7 +258,7 @@ sub kids {
 
 Did $a have any kids with $b?
 
-$a->has_partner($b) ? 'you betcha' : 'nope'
+print $a->has_partner($b) ? 'you betcha' : 'nope'
 
 =cut
 
@@ -348,7 +348,7 @@ sub _set_all_generations {
 
 Get all people
 
-$class->all
+Tree::Family::Person->all
 
 =cut
 
@@ -359,7 +359,7 @@ sub all {
 
 =head2 partners_and_spouse
 
-Get a list of all people with a person had kids, and their spouse (if
+Get a list of all people with whom a person had kids, and their spouse (if
 they have one)
 
 =cut
