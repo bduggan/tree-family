@@ -653,7 +653,8 @@ sub DESTROY {
 
 =head1 SEE ALSO
 
-Tree::Family::Person
+ Tree::Family::Person
+ family.cgi (in this distribution)
 
 =head1 AUTHOR
 
